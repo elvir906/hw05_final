@@ -1,6 +1,7 @@
 from django.test import TestCase
-from ..models import Comment
 from django.urls import reverse
+
+from ..models import Comment
 from .fixtures import UsersCreate, ObjectsCreate
 
 

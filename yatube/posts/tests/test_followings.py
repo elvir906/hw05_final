@@ -1,6 +1,7 @@
 from django.test import TestCase
-from ..models import Follow, User
 from django.urls import reverse
+
+from ..models import User, Follow
 from .fixtures import UsersCreate, ObjectsCreate
 
 
@@ -35,16 +36,15 @@ class TestFollows(TestCase):
         self.FOLLOW_INDEX = reverse('posts:follow_index')
 
     def test_an_authorized_user_can_subscribe_to_other_users(self):
-        "...and remove them from subscriptions"
         follow = Follow.objects.filter(user=self.USER, author=self.post_author)
-
         self.AUTHORIZED_USER.get(self.PROFILE_FOLLOW)
         self.assertTrue(follow.exists())
-
-        self.AUTHORIZED_USER.get(self.PROFILE_UNFOLLOW)
+        self.GUEST.get(self.PROFILE_FOLLOW)
         self.assertFalse(follow.exists())
 
-        self.GUEST.get(self.PROFILE_FOLLOW)
+    def test_an_authorized_user_can_remove_other_users_from_subscriptions(self):
+        follow = Follow.objects.filter(user=self.USER, author=self.post_author)
+        self.AUTHORIZED_USER.get(self.PROFILE_UNFOLLOW)
         self.assertFalse(follow.exists())
 
     def test_a_new_post_appears_in_the_feed_of_subscribers(self):

@@ -3,9 +3,10 @@ import tempfile
 
 from django.test import TestCase, override_settings
 from django.urls import reverse
-from ..models import Post
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.conf import settings
+
+from ..models import Post
 from .fixtures import UsersCreate, ObjectsCreate
 
 TEXT = 'Текст поста'
