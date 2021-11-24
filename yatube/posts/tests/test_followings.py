@@ -36,11 +36,10 @@ class TestFollows(TestCase):
         self.FOLLOW_INDEX = reverse('posts:follow_index')
 
     def test_an_authorized_user_can_subscribe_to_other_users(self):
-        follow = Follow.objects.filter(user=self.USER, author=self.post_author)
         self.AUTHORIZED_USER.get(self.PROFILE_FOLLOW)
-        self.assertTrue(follow.exists())
-        self.GUEST.get(self.PROFILE_FOLLOW)
-        self.assertFalse(follow.exists())
+        follow = Follow.objects.filter(user=self.USER, author=self.post_author)
+        self.assertTrue(follow.exists())    
+        self.assertEqual(self.GUEST.get(self.PROFILE_FOLLOW).status_code, 302) 
 
     def test_an_authorized_user_can_remove_other_users_from_subscriptions(self):
         follow = Follow.objects.filter(user=self.USER, author=self.post_author)
@@ -48,7 +47,6 @@ class TestFollows(TestCase):
         self.assertFalse(follow.exists())
 
     def test_a_new_post_appears_in_the_feed_of_subscribers(self):
-        "...and does not appear in the feed of those who are not subscribed"
         unfollowed = User.objects.create(username='unfollowed')
         unfollowed_user = UsersCreate.authorized_client_create(unfollowed)
 

@@ -11,8 +11,9 @@ from .utils import page_obj_gen
 def index(request):
     posts = Post.objects.all().select_related('group')
     page_obj = page_obj_gen(request, posts)
-    if Follow.objects.filter(user=request.user).exists():
+    if request.user.is_authenticated:
         follow = True
+    else: follow = False
     title = 'Последние обновления на сайте'
     context = {
         'page_obj': page_obj,
