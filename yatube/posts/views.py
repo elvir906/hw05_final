@@ -142,8 +142,9 @@ def follow_index(request):
     else:
         posts = Post.objects.none()
     title = 'Посты избранных авторов'
+    page_obj = page_obj_gen(request, posts)
     context = {
-        'page_obj': posts,
+        'page_obj': page_obj,
         'title': title,
     }
     return render(request, 'posts/follow.html', context)
