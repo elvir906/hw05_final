@@ -38,10 +38,10 @@ class TestFollows(TestCase):
     def test_an_authorized_user_can_subscribe_to_other_users(self):
         self.AUTHORIZED_USER.get(self.PROFILE_FOLLOW)
         follow = Follow.objects.filter(user=self.USER, author=self.post_author)
-        self.assertTrue(follow.exists())    
-        self.assertEqual(self.GUEST.get(self.PROFILE_FOLLOW).status_code, 302) 
+        self.assertTrue(follow.exists())
+        self.assertEqual(self.GUEST.get(self.PROFILE_FOLLOW).status_code, 302)
 
-    def test_an_authorized_user_can_remove_other_users_from_subscriptions(self):
+    def test_authorized_user_can_remove_other_users_from_subscriptions(self):
         follow = Follow.objects.filter(user=self.USER, author=self.post_author)
         self.AUTHORIZED_USER.get(self.PROFILE_UNFOLLOW)
         self.assertFalse(follow.exists())
