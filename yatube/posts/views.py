@@ -141,8 +141,10 @@ def follow_index(request):
         posts = Post.objects.filter(author_id__in=followings)
     else:
         posts = Post.objects.none()
+    title = 'Посты избранных авторов'
     context = {
         'page_obj': posts,
+        'title': title,
     }
     return render(request, 'posts/follow.html', context)
 
@@ -155,6 +157,8 @@ def profile_follow(request, username):
         following = False
     elif user != author:
         Follow.objects.create(user=user, author=author)
+        following = True
+    else:
         following = True
     posts = author.posts.all()
     page_obj = page_obj_gen(request, posts)
