@@ -153,7 +153,7 @@ def profile_follow(request, username):
     user = get_object_or_404(User, username=request.user)
     if Follow.objects.filter(user=request.user, author=author).exists():
         following = False
-    else:
+    elif user != author:
         Follow.objects.create(user=user, author=author)
         following = True
     posts = author.posts.all()
