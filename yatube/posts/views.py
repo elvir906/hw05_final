@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-
 from django.shortcuts import redirect, render
 from django.shortcuts import get_object_or_404
 
@@ -11,10 +10,7 @@ from .utils import page_obj_gen
 def index(request):
     posts = Post.objects.all().select_related('group')
     page_obj = page_obj_gen(request, posts)
-    if request.user.is_authenticated:
-        follow = True
-    else:
-        follow = False
+    follow = request.user.is_authenticated
     title = 'Последние обновления на сайте'
     context = {
         'page_obj': page_obj,
