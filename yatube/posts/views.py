@@ -39,12 +39,17 @@ def profile(request, username):
     posts = author.posts.all()
     page_obj = page_obj_gen(request, posts)
     title = f'Профайл пользователя {author.get_full_name()}'
-    if request.user.is_authenticated:
-        following = Follow.objects.filter(
-            user=request.user, author=author
+    # if request.user.is_authenticated:
+    #     following = Follow.objects.filter(
+    #         user=request.user, author=author
+    #     ).exists()
+    # else:
+    #     following = True
+    following = request.user.is_authenticated and request.user != author and (
+        Follow.objects.filter(
+            author=author
         ).exists()
-    else:
-        following = True
+    )
     context = {
         'author': author,
         'page_obj': page_obj,
