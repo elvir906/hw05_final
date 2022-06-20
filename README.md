@@ -1,3 +1,44 @@
-# hw05_final
+# Учебный проект социальной сети Yatube
+Создан в рамках учебы в Яндекс.Практикум и представляет собой сервис, позволяющий создавать посты с изображениями. Так же посты можно объединить по тематике в группы. Например, посты
+на автомобильные темы или тексты про дизайн помещений и т.п. У проекта есть администраторская часть, позволяющая производить действия над постами (удалять, редактировать, создавать), а так же редактировать группы и зарегистрировавшихся участников. У авторизованных пользователей имеется возможноть подписки на определенного
+автора или авторов.
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+## Стек технологий
+* Python 3.8
+* Django 2.2
+* Unittest
+* Pytest
+* SQLite3
+* CSS
+* HTML
+
+## Установка проекта из репозитория (Linux и macOS)
+Клонировать репозиторий и перейти в него в командной строке:
+```
+git clone git@github.com:NikitaChalykh/YaTube.git
+```
+```
+cd YaTube
+```
+Cоздать и активировать виртуальное окружение:
+```
+python3 -m venv env
+```
+```
+source env/bin/activate
+```
+Установить зависимости из файла requirements.txt:
+```
+python3 -m pip install --upgrade pip
+```
+```
+pip install -r requirements.txt
+```
+Выполнить миграции:
+```
+python3 manage.py migrate
+```
+Запустить проект (в режиме сервера Django):
+```
+python3 manage.py runserver
+```
