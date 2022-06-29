@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 Выполнить миграции:
 ```
- manage.py migrate
+python manage.py migrate
 ```
 
 Запустить проект:
