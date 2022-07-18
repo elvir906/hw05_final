@@ -11,7 +11,7 @@
 
 Склонировать файлы проекта:
 ```
-git clone https://gtihub.com/elvir906/yatube.git
+git clone https://github.com/elvir906/yatube.git
 ```
 ```
 cd yatube
